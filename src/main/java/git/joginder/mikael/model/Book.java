@@ -7,7 +7,23 @@ public class Book {
     private int year;
     private String isbn;
 
-    public Book(){
+    //BOOK ATTRIBUTES
+    // Default constructor
+    public Book() {
+        this.id = 0;
+        this.title = "Unknown";
+        this.author = "Unknown";
+        this.year = 0;
+        this.isbn = "N/A";
+    }
+
+    // Parameterized constructor
+    public Book(int id, String title, String author, int year, String isbn) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.isbn = isbn;
     }
 
     //setters
