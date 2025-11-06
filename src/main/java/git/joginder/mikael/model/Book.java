@@ -11,10 +11,10 @@ public class Book {
     // Default constructor
     public Book() {
         this.id = 0;
-        this.title = "Unknown";
-        this.author = "Unknown";
+        this.title = null;
+        this.author = null;
         this.year = 0;
-        this.isbn = "N/A";
+        this.isbn = null;
     }
 
     // Parameterized constructor
