@@ -4,14 +4,17 @@ import git.joginder.mikael.dao.BookDao;
 import git.joginder.mikael.model.Book;
 
 import java.nio.file.Path;
+import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
 //This class handles the business logical. It acts as the middle layer between the DAO and the UI
 public class LibraryService {
     BookDao bookDao;
-    public LibraryService(){
-        bookDao = new BookDao();
+
+    Connection connection = null;
+    public LibraryService(BookDao bookDao){
+       this.bookDao = new BookDao(connection);
     }
 
     public boolean addBook(Book book){
@@ -43,10 +46,19 @@ public class LibraryService {
         return bookDao.getAllBook();
     }
     public void removeBook(int id){
-        bookDao.deleteBook(id);
+        if(bookDao.deleteBook(id)){
+            IO.println("BOOK RECORD DELETION SUCCESSFUL.");
+        }else{
+            IO.println("BOOK RECORD DELETION FAILED.");
+        }
     }
     public void updateBook(Book book){
-        bookDao.updateBook(book);
+        if(bookDao.updateBook(book)){
+            IO.println("BOOK RECORDS UPDATE SUCCESSFUL");
+        }else {
+            IO.println("BOOK RECORDS UPDATE FAILED");
+        }
+
     }
 
     public void exportBooksToJson(Path filepath){

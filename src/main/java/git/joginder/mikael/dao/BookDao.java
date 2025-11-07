@@ -9,14 +9,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 //Handles CRUD (Create, Read, Update, Delete) operations with JDBC.
 public class BookDao {
     Connection connection;
 
-    public BookDao(){
-        this.connection = DBConnection.getConnection();
+    public BookDao(Connection connection){
+       // this.connection = DBConnection.getConnection();
     }
 
     public void addBook(Book book) {
