@@ -13,9 +13,8 @@ import java.util.List;
 //Handles CRUD (Create, Read, Update, Delete) operations with JDBC.
 public class BookDao {
     Connection connection;
-
     public BookDao(Connection connection){
-       // this.connection = DBConnection.getConnection();
+        this.connection = connection;
     }
 
     public void addBook(Book book) {

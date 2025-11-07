@@ -10,11 +10,10 @@ import java.util.Map;
 
 //This class handles the business logical. It acts as the middle layer between the DAO and the UI
 public class LibraryService {
-    BookDao bookDao;
 
-    Connection connection = null;
-    public LibraryService(BookDao bookDao){
-       this.bookDao = new BookDao(connection);
+        BookDao bookDao;
+        public LibraryService(BookDao bookDao){
+        this.bookDao = bookDao;
     }
 
     public boolean addBook(Book book){

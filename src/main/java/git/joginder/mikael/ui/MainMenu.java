@@ -108,21 +108,34 @@ Scanner scanner = new Scanner(System.in);
                         IO.print("ENTER THE BOOK ID: ");
                         int bookId = scanner.nextInt();
                         scanner.nextLine();
+                        book.setId(bookId);
+
+
                         IO.print("ENTER THE BOOK TITLE (PRESS ENTER TO SKIP): ");
                         String bookTitle = scanner.nextLine();
+                        book.setTitle(bookTitle);
+
+
                         IO.print("ENTER THE BOOK AUTHOR (PRESS ENTER TO SKIP): ");
                         String bookAuthor = scanner.nextLine();
+                        book.setAuthor(bookAuthor);
+
+
                         IO.print("ENTER THE BOOK YEAR (PRESS ENTER TO SKIP): ");
-                        int bookYear = scanner.nextInt();
-                        scanner.nextLine();
+                        String bookYearInput = scanner.nextLine();
+
+                        Integer bookYear = null;
+                        if (!bookYearInput.isEmpty()) {
+                            try {
+                                bookYear = Integer.parseInt(bookYearInput);
+                                book.setYear(bookYear);
+                            } catch (NumberFormatException e) {
+                                System.out.println("⚠️ Invalid year format. Skipping value.");
+                            }
+                        }
+
                         IO.print("ENTER THE BOOK ISBN (PRESS ENTER TO SKIP): ");
                         String bookIsbn = scanner.nextLine();
-
-
-                        book.setId(bookId);
-                        book.setTitle(bookTitle);
-                        book.setAuthor(bookAuthor);
-                        book.setYear(bookYear);
                         book.setIsbn(bookIsbn);
 
                         libraryService.updateBook(book);

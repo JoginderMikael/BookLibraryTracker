@@ -7,6 +7,7 @@ import git.joginder.mikael.ui.MainMenu;
 import git.joginder.mikael.util.DBConnection;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public class Main {
     static void main() {
@@ -22,9 +23,18 @@ public class Main {
             LibraryService libraryService = new LibraryService(bookDao);
             MainMenu mainMenu = new MainMenu(libraryService);
             mainMenu.displayMenu();
-
         } catch (Exception e){
             System.err.println("APPLICATION STARTUP ERROR: " + e.getMessage());
+           // e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null && !connection.isClosed()) {
+                    connection.close();
+                }
+            }catch(Exception ex){
+                    IO.println("ERROR CLOSING CONNECTION: " + ex.getMessage());
+
+            }
         }
     }
 }
