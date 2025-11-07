@@ -16,7 +16,7 @@ public class BookDao {
     Connection connection;
 
     public BookDao(){
-        connection = DBConnection.getConnection();
+        this.connection = DBConnection.getConnection();
     }
 
     public void addBook(Book book) {
@@ -142,6 +142,35 @@ public class BookDao {
     }
 
     public void batchInsertBooks(List<Book> books){
-
+        String sql  = "INSERT INTO books (title, author, year, isbn) VALUES (?, ?, ?, ?)";
+        try(PreparedStatement ps = connection.prepareStatement(sql)){
+            connection.setAutoCommit(false); //disable auto-commit for batch efficiency
+            for(Book book : books){
+                ps.setString(1, book.getTitle());
+                ps.setString(2, book.getAuthor());
+                ps.setInt(3, book.getYear());
+                ps.setString(4, book.getIsbn());
+                ps.addBatch();
+            }
+            ps.executeBatch(); //execute all inserts at once
+            connection.commit(); //commit the transaction.
+        }catch (SQLException e){
+            IO.println("BATCH INSERT FAILED. " + e.getMessage());
+            try{
+                if (connection != null){
+                    connection.rollback(); //roll back because auto commit had been disabled
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+        } finally {
+            try{
+                if(connection != null){
+                    connection.setAutoCommit(true);
+                }
+            } catch (SQLException e) {
+                IO.println("Error resetting Autocommit: " + e.getMessage());
+            }
+        }
     }
 }
