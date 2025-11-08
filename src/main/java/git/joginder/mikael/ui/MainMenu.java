@@ -23,16 +23,18 @@ Scanner scanner = new Scanner(System.in);
     public void displayMenu(){
     boolean exit = false;
     while(!exit){
-        IO.println("LIBRARY OPTIONS" + "\n" +
-                "1. ADD BOOK" + "\n" +
-                "2. VIEW ALL BOOKS" + "\n" +
-                "3. FIND BOOK BY ID" + "\n" +
-                "4. UPDATE A BOOK" + "\n" +
-                "5. DELETE A BOOK" + "\n" +
-                "6. EXPORT TO JSON" + "\n" +
-                "7. IMPORT FROM JSON" + "\n" +
-                "8. PRINT STATISTICS" + "\n" +
-                "9. EXIT" + "\n"
+        IO.println("""
+                LIBRARY OPTIONS
+                1. ADD BOOK
+                2. VIEW ALL BOOKS
+                3. FIND BOOK BY ID
+                4. UPDATE A BOOK
+                5. DELETE A BOOK
+                6. EXPORT TO JSON
+                7. IMPORT FROM JSON
+                8. PRINT STATISTICS
+                9. EXIT
+                """
         );
 
         int choice = 0;
