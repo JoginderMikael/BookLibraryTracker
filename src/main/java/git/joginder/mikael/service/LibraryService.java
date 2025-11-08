@@ -2,9 +2,11 @@ package git.joginder.mikael.service;
 
 import git.joginder.mikael.dao.BookDao;
 import git.joginder.mikael.model.Book;
+import git.joginder.mikael.util.JsonUtil;
 
 import java.nio.file.Path;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -61,7 +63,9 @@ public class LibraryService {
     }
 
     public void exportBooksToJson(Path filepath){
-
+            JsonUtil jsonUtil = new JsonUtil();
+            List<Book> books = new ArrayList<>(bookDao.getAllBook());
+            jsonUtil.writeBooksToJson(books,filepath);
     }
 
     public void importFromJson(Path filepath){

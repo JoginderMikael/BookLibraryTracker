@@ -16,6 +16,7 @@ public class JsonUtil {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
             objectMapper.writeValue(filePath.toFile(), books);
+            IO.println("SUCCESSFULLY WRITTEN TO FILE.");
         } catch (IOException e) {
             IO.println("FAILED TO WRITE. " + e.getMessage());
         }

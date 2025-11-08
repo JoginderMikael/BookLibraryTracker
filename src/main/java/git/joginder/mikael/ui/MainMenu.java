@@ -3,6 +3,9 @@ package git.joginder.mikael.ui;
 import git.joginder.mikael.model.Book;
 import git.joginder.mikael.service.LibraryService;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -161,6 +164,23 @@ Scanner scanner = new Scanner(System.in);
                         IO.println("AN ERROR OCCURRED. " + ex.getMessage());
                     }
 
+                }
+                case 6 ->{
+                    IO.println("EXPORT THE BOOKS TO JSON FILE.");
+                    Path path = Paths.get("backups");
+                    Path filePath = path.resolve("books.json");
+                    if(Files.exists(filePath)){
+                        libraryService.exportBooksToJson(filePath);
+                    }else{
+                        try {
+                            Files.createDirectories(path);
+                            Files.createFile(filePath);
+                            libraryService.exportBooksToJson(filePath);
+                        } catch (Exception e) {
+                            IO.println("ERROR WHILE WRITING TO FILE. " + e.getMessage());
+                        }
+
+                    }
                 }
                 case 9 -> {
                     IO.println("THANK YOU FOR USING BOOK TRACKER");
