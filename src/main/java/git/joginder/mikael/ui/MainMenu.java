@@ -50,7 +50,7 @@ Scanner scanner = new Scanner(System.in);
             scanner.nextLine();
         }
 
-            switch (choice){
+        switch (choice){
                 case 1 -> {
                     try {
                         Book book = new Book();
@@ -178,6 +178,23 @@ Scanner scanner = new Scanner(System.in);
                             libraryService.exportBooksToJson(filePath);
                         } catch (Exception e) {
                             IO.println("ERROR WHILE WRITING TO FILE. " + e.getMessage());
+                        }
+
+                    }
+                }
+                case 7 -> {
+                    IO.println("IMPORT THE BOOKS FROM JSON FILE.");
+                    Path path = Paths.get("backups");
+                    Path filePath = path.resolve("books.json");
+                    if(Files.exists(filePath)){
+                        libraryService.importFromJson(filePath);
+                    }else{
+                        try {
+                            Files.createDirectories(path);
+                            Files.createFile(filePath);
+                            libraryService.importFromJson(filePath);
+                        } catch (Exception e) {
+                            IO.println("ERROR WHILE READING FROM FILE. " + e.getMessage());
                         }
 
                     }

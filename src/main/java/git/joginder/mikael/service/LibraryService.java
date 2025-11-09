@@ -1,9 +1,14 @@
 package git.joginder.mikael.service;
 
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import git.joginder.mikael.dao.BookDao;
 import git.joginder.mikael.model.Book;
 import git.joginder.mikael.util.JsonUtil;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -69,7 +74,8 @@ public class LibraryService {
     }
 
     public void importFromJson(Path filepath){
-
+        JsonUtil jsonUtil = new JsonUtil(bookDao);
+        jsonUtil.readBooksFromJson(filepath);
     }
     public Map<String, Integer> getBookStatistics(){
         return null;
