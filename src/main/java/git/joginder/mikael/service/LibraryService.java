@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -77,8 +78,9 @@ public class LibraryService {
         JsonUtil jsonUtil = new JsonUtil(bookDao);
         jsonUtil.readBooksFromJson(filepath);
     }
-    public Map<String, Integer> getBookStatistics(){
-        return null;
+
+    public Map<Integer, Integer> getBookStatistics() {
+        return bookDao.getBookStatistics();
     }
 
 }

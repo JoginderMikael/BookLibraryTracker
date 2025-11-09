@@ -8,7 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //Handles CRUD (Create, Read, Update, Delete) operations with JDBC.
 public class BookDao {
@@ -170,5 +172,25 @@ public class BookDao {
                 IO.println("Error resetting Autocommit: " + e.getMessage());
             }
         }
+    }
+
+    public Map<Integer, Integer> getBookStatistics(){
+        Map<Integer, Integer> stats = new HashMap<>();
+        String sql = "SELECT year, COUNT(*) AS count FROM books WHERE year IS NOT NULL GROUP BY year ORDER BY year";
+        try(PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()){
+
+            while (rs.next()){
+                int year = rs.getInt("year");
+                int count = rs.getInt("count");
+                stats.put(year, count);
+            }
+
+
+        } catch (SQLException e) {
+            IO.println("ERROR IN FETCHING BOOK STATS. " + e.getMessage());
+        }
+
+        return stats;
     }
 }

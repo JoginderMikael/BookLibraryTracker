@@ -7,15 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.InputMismatchException;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MainMenu {
 
-    /*
-    create this path
-    ── backups/
-│   └── books_backup.json
-     */
 LibraryService libraryService;
 Scanner scanner = new Scanner(System.in);
 
@@ -50,6 +46,7 @@ Scanner scanner = new Scanner(System.in);
             scanner.nextLine();
         }
 
+        final Path backups = Paths.get("backups");
         switch (choice){
                 case 1 -> {
                     try {
@@ -75,6 +72,7 @@ Scanner scanner = new Scanner(System.in);
                         book.setYear(bookYear);
                         book.setIsbn(bookIsbn);
 
+                        IO.println("------------------------------");
                         if(libraryService.addBook(book)){
                             IO.println("BOOK RECORD ADDED SUCCESSFULLY.");
                         } else{
@@ -83,11 +81,12 @@ Scanner scanner = new Scanner(System.in);
                     } catch (Exception e){
                         IO.println(e.getMessage());
                     }
+                    IO.println("------------------------------");
                 }
                 case 2 -> {
                     for (Book book : libraryService.listAllBooks()){
                          IO.println(book.toString());
-                        IO.println("----------------------");
+                        IO.println("------------------------------");
                         }
                 }
                 case 3 -> {
@@ -96,6 +95,7 @@ Scanner scanner = new Scanner(System.in);
                         int bookId = scanner.nextInt();
                         scanner.nextLine();
                         Book book = libraryService.findBookById(bookId);
+                        IO.println("------------------------------");
                         IO.println(book.toString());
                     } catch (InputMismatchException ex){
                         IO.println("WRONG INPUT" + ex.getMessage());
@@ -104,6 +104,7 @@ Scanner scanner = new Scanner(System.in);
                         IO.println("ERROR " + e.getMessage());
                         scanner.nextLine();
                     }
+                    IO.println("------------------------------");
                 }
                 case 4 ->{
                     try{
@@ -129,13 +130,13 @@ Scanner scanner = new Scanner(System.in);
                         IO.print("ENTER THE BOOK YEAR (PRESS ENTER TO SKIP): ");
                         String bookYearInput = scanner.nextLine();
 
-                        Integer bookYear = null;
+                        int bookYear;
                         if (!bookYearInput.isEmpty()) {
                             try {
                                 bookYear = Integer.parseInt(bookYearInput);
                                 book.setYear(bookYear);
                             } catch (NumberFormatException e) {
-                                System.out.println("⚠️ Invalid year format. Skipping value.");
+                                IO.println("Invalid year format. Skipping value.");
                             }
                         }
 
@@ -143,19 +144,21 @@ Scanner scanner = new Scanner(System.in);
                         String bookIsbn = scanner.nextLine();
                         book.setIsbn(bookIsbn);
 
+                        IO.println("------------------------------");
                         libraryService.updateBook(book);
 
                     } catch (Exception e){
                         IO.println(e.getMessage());
                         scanner.nextLine();
                     }
-
+                    IO.println("------------------------------");
                 }
                 case 5 ->{
                     try{
                         IO.print("ENTER THE BOOK ID: ");
                         int bookId = scanner.nextInt();
                         scanner.nextLine();
+                        IO.println("------------------------------");
                         libraryService.removeBook(bookId);
                     } catch (InputMismatchException e){
                         IO.println("INVALID INPUT." + e.getMessage());
@@ -163,17 +166,17 @@ Scanner scanner = new Scanner(System.in);
                     } catch (Exception ex){
                         IO.println("AN ERROR OCCURRED. " + ex.getMessage());
                     }
-
+                    IO.println("------------------------------");
                 }
                 case 6 ->{
                     IO.println("EXPORT THE BOOKS TO JSON FILE.");
-                    Path path = Paths.get("backups");
-                    Path filePath = path.resolve("books.json");
+                    Path filePath = backups.resolve("books.json");
+                    IO.println("------------------------------");
                     if(Files.exists(filePath)){
                         libraryService.exportBooksToJson(filePath);
                     }else{
                         try {
-                            Files.createDirectories(path);
+                            Files.createDirectories(backups);
                             Files.createFile(filePath);
                             libraryService.exportBooksToJson(filePath);
                         } catch (Exception e) {
@@ -181,16 +184,18 @@ Scanner scanner = new Scanner(System.in);
                         }
 
                     }
+                    IO.println("------------------------------");
                 }
                 case 7 -> {
                     IO.println("IMPORT THE BOOKS FROM JSON FILE.");
-                    Path path = Paths.get("backups");
-                    Path filePath = path.resolve("books.json");
+                    Path filePath = backups.resolve("books.json");
+
+                    IO.println("------------------------------");
                     if(Files.exists(filePath)){
                         libraryService.importFromJson(filePath);
                     }else{
                         try {
-                            Files.createDirectories(path);
+                            Files.createDirectories(backups);
                             Files.createFile(filePath);
                             libraryService.importFromJson(filePath);
                         } catch (Exception e) {
@@ -198,14 +203,30 @@ Scanner scanner = new Scanner(System.in);
                         }
 
                     }
+                    IO.println("------------------------------");
+                }
+                case 8 ->{
+                    IO.println("\n--- Book Statistics by Year ---");
+
+                    Map<Integer, Integer> stats = libraryService.getBookStatistics();
+
+                    if (stats.isEmpty()) {
+                        System.out.println("No books with year information found.");
+                        return;
+                    }
+
+                    stats.forEach((year, count) ->
+                            IO.println("Year: " + year + " → " + count + " book(s)")
+                    );
+                    IO.println("---------------------------------");
                 }
                 case 9 -> {
+                    IO.println("------------------------------");
                     IO.println("THANK YOU FOR USING BOOK TRACKER");
+                    IO.println("------------------------------");
                     exit = true;
                 }
-                default -> {
-                    IO.println("WRONG CHOICE. PLEASE CHOOSE(1 - 9)");
-                }
+                default -> IO.println("WRONG CHOICE. PLEASE CHOOSE(1 - 9)");
             }
     }
 
