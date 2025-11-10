@@ -190,7 +190,6 @@ public class BookDao {
         } catch (SQLException e) {
             IO.println("ERROR IN FETCHING BOOK STATS. " + e.getMessage());
         }
-
         return stats;
     }
 }

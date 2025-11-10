@@ -1,0 +1,79 @@
+[ {
+  "id" : 1,
+  "title" : "Clean Code",
+  "author" : "Robert C. Martin",
+  "year" : 2008,
+  "isbn" : "9780132350884"
+}, {
+  "id" : 2,
+  "title" : "Effective Java",
+  "author" : "Joshua Bloch",
+  "year" : 2018,
+  "isbn" : "9780134685991"
+}, {
+  "id" : 3,
+  "title" : "The Pragmatic Programmer",
+  "author" : "Andrew Hunt",
+  "year" : 1999,
+  "isbn" : "9780201616224"
+}, {
+  "id" : 4,
+  "title" : "JAVA PROGRAMMING LIFE",
+  "author" : "Joginder Mikael",
+  "year" : 2025,
+  "isbn" : "38774-JAKASS"
+}, {
+  "id" : 6,
+  "title" : "JOGINDER LIVES",
+  "author" : "mikael jd",
+  "year" : 2024,
+  "isbn" : "998490583745"
+}, {
+  "id" : 10,
+  "title" : "Extreme Programming Explained",
+  "author" : "Kent Beck",
+  "year" : 2004,
+  "isbn" : "9780321278654"
+}, {
+  "id" : 11,
+  "title" : "Domain-Driven Design",
+  "author" : "Eric Evans",
+  "year" : 2003,
+  "isbn" : "9780321125217"
+}, {
+  "id" : 12,
+  "title" : "Patterns of Enterprise Application Architecture",
+  "author" : "Martin Fowler",
+  "year" : 2002,
+  "isbn" : "9780321127426"
+}, {
+  "id" : 13,
+  "title" : "Software Engineering at Google",
+  "author" : "Titus Winters",
+  "year" : 2020,
+  "isbn" : "9781492082798"
+}, {
+  "id" : 14,
+  "title" : "Clean Architecture",
+  "author" : "Robert C. Martin",
+  "year" : 2017,
+  "isbn" : "9780134494166"
+}, {
+  "id" : 15,
+  "title" : "Refactoring to Patterns",
+  "author" : "Joshua Kerievsky",
+  "year" : 2004,
+  "isbn" : "9780321213358"
+}, {
+  "id" : 16,
+  "title" : "Agile Software Development, Principles, Patterns, and Practices",
+  "author" : "Robert C. Martin",
+  "year" : 2002,
+  "isbn" : "9780135974445"
+}, {
+  "id" : 17,
+  "title" : "Joginder KKSJ",
+  "author" : "Nixons KK",
+  "year" : 2019,
+  "isbn" : "859960493845"
+} ]

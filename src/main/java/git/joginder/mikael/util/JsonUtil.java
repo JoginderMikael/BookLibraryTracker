@@ -52,16 +52,4 @@ public class JsonUtil {
 
     }
 
-//    public static List<Book> fromJson(String json, Class<Book> clazz){
-//        try{
-//            ObjectMapper objectMapper = new ObjectMapper();
-//            TypeFactory typeFactory = objectMapper.getTypeFactory();
-//            JavaType listOfBooks = typeFactory.constructCollectionType(List.class, clazz);
-//            return objectMapper.readValue(json, listOfBooks);
-//        } catch (JsonMappingException e) {
-//            throw new RuntimeException(e);
-//        } catch (JsonProcessingException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 }
