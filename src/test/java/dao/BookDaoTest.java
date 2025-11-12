@@ -3,6 +3,7 @@ package dao;
 import git.joginder.mikael.dao.BookDao;
 import git.joginder.mikael.model.Book;
 import git.joginder.mikael.util.DBConnection;
+import git.joginder.mikael.util.JsonUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -11,9 +11,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 //Handles CRUD (Create, Read, Update, Delete) operations with JDBC.
 public class BookDao {
+    private static final Logger logger = LogManager.getLogger(BookDao.class);
+
     Connection connection;
     public BookDao(Connection connection){
         this.connection = connection;
@@ -155,7 +160,9 @@ public class BookDao {
             ps.executeBatch(); //execute all inserts at once
             connection.commit(); //commit the transaction.
         }catch (SQLException e){
-            IO.println("BATCH INSERT FAILED. " + e.getMessage());
+           // IO.println("BATCH INSERT FAILED. " + e.getMessage());
+            logger.error("BATCH INSERT FAILED: {}", e.getMessage());
+
             try{
                 if (connection != null){
                     connection.rollback(); //roll back because auto commit had been disabled
@@ -169,7 +176,8 @@ public class BookDao {
                     connection.setAutoCommit(true);
                 }
             } catch (SQLException e) {
-                IO.println("Error resetting Autocommit: " + e.getMessage());
+               // IO.println("Error resetting Autocommit: " + e.getMessage());
+                logger.error("Error resetting Autocommit: {}" , e.getMessage());
             }
         }
     }
